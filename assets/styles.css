@@ -1,0 +1,42 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	@apply leading-normal text-gray-700 bg-gray-100 text-lg;
+}
+
+/* buttons */
+.btn {
+	@apply font-sans font-bold uppercase text-sm text-center;
+	@apply px-6 py-3 mr-1 mb-1;
+	@apply rounded shadow outline-none focus:outline-none ease-linear transition-all duration-150;
+	@apply bg-gray-400 text-gray-700 hover:text-white hover:bg-gray-600;
+}
+.btn.disabled {
+	@apply cursor-default;
+	@apply bg-gray-300 text-gray-400 shadow-none;
+	@apply hover:bg-gray-300 hover:text-gray-400 hover:shadow-none;
+}
+.btn.enabled {
+	@apply hover:shadow-lg cursor-pointer;
+}
+.btn.small {
+	@apply px-3 py-1 text-xs;
+}
+.btn.primary {
+	@apply bg-blue-700 text-blue-100 hover:bg-blue-900;
+}
+.btn.secondary {
+	@apply bg-gray-700 text-gray-100 hover:bg-gray-900;
+}
+.btn.success {
+	@apply bg-green-700 text-green-100 hover:bg-green-900;
+}
+.btn.warning {
+	@apply bg-red-700 text-red-100 hover:bg-red-900;
+}
+.btn.outlined {
+	@apply bg-white border border-solid border-gray-700 hover:text-gray-900 hover:bg-gray-100;
+}
