@@ -54,12 +54,22 @@ export default {
 				// this needs a response message including a link to the file
 				// or even an auto download of the file
 				const response = await this.$axios.post('/api/upload', data, {
+					responseType: 'blob',
 					headers: {
 						'Content-Type': 'multipart/form-data'
 					}
 				})
 
-				console.log(response)
+				const link = document.createElement('a')
+
+				link.href = URL.createObjectURL(response.data)
+				link.setAttribute('download', 'file.html') // TODO read this from the file itself
+
+				document.body.appendChild(link)
+				link.click()
+
+				document.body.removeChild(link)
+				URL.revokeObjectURL(href)
 			}
 			catch(ex) {
 				console.log(ex)

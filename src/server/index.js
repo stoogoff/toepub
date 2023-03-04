@@ -72,9 +72,7 @@ app.post('/upload', verifyAuthHeaderMiddleware, async (req, res, next) => {
 		contents.push(Buffer.from(req.files[key].data).toString())
 	})
 
-	//console.log(contents)
-
-	pandoc(contents.join('\n\n'), '-f markdown -t epub', (err, result) => {
+	pandoc(contents.join('\n\n'), '-f markdown -t html', (err, result) => {
 		if(err) {
 			console.error(err)
 			return next({ status: 500, message: `Failed to convert: ${err}` })
@@ -83,6 +81,7 @@ app.post('/upload', verifyAuthHeaderMiddleware, async (req, res, next) => {
 		//console.log(result)
 
 		res.set('Content-Type', 'application/epub+zip')
+		res.set('Content-Disposition', 'attachment; filename="file.html"')
 		res.status(200).send(Buffer.from(result))
 	})
 
