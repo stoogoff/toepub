@@ -39,7 +39,7 @@ export default Vue.component('FileList', {
 	methods: {
 		deleteFile(file) {
 			const files = this.files.filter(f => f !== file)
-console.log('deleteFile', files)
+
 			this.$emit('update', files)
 		},
 	}

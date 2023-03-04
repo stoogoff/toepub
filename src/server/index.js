@@ -1,9 +1,13 @@
 
+const fs = require('fs')
+const path = require('path')
 const express = require('express')
 const bodyParser = require('body-parser')
 const fileUpload = require('express-fileupload')
 const pandoc = require('node-pandoc')
 //const { getTodosForUser, saveTodoForUser, updateTodoForUser } = require('./todo')
+
+const { createId } = require('../utils/string')
 
 const app = express()
 
@@ -66,23 +70,35 @@ app.post('/upload', verifyAuthHeaderMiddleware, async (req, res, next) => {
 		return next({ status: 400, message: 'No files provided.' })
 	}
 
-	const contents = []
+	// make this editable in the UI
+	const contents = [`---
+title: Test File
+author: Stoo Goff
+rights:  Creative Commons Non-Commercial Share Alike 3.0
+language: en-GB
+...`]
 
 	Object.keys(req.files).forEach(key => {
 		contents.push(Buffer.from(req.files[key].data).toString())
 	})
 
-	pandoc(contents.join('\n\n'), '-f markdown -t html', (err, result) => {
+	const dirPath = path.join(__dirname, 'output', createId())
+	const filePath = path.join(dirPath, 'test.epub')
+
+	fs.mkdirSync(dirPath)
+
+
+	pandoc(contents.join('\n\n'), `-f markdown -t epub -o ${filePath}`, (err, result) => {
 		if(err) {
-			console.error(err)
 			return next({ status: 500, message: `Failed to convert: ${err}` })
 		}
 
-		//console.log(result)
+		const data = fs.readFileSync(filePath)
 
 		res.set('Content-Type', 'application/epub+zip')
-		res.set('Content-Disposition', 'attachment; filename="file.html"')
-		res.status(200).send(Buffer.from(result))
+		res.set('Content-Disposition', 'attachment; filename="file.epub"')
+		res.status(200).send(data)
+		//res.status(200).send('OK')
 	})
 
 	//res.status(200).send('Received')
