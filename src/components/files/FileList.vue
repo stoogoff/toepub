@@ -2,13 +2,13 @@
 	<div class="my-4 text-xl">
 		<draggable v-model="draggable">
 			<div
-				class="p-4 mb-1 flex rounded bg-white border-2 border-white hover:border-blue-200 cursor-move"
+				class="p-4 mb-1 flex rounded bg-white border-2 border-white hover:border-celestial-light cursor-move"
 				v-for="(file, idx) in files"
 				:key="`file_${idx}`"
 			>
 				<span class="mr-1"><icon-view icon="file" /></span>
 				<span class="flex-grow">{{ file.name }}</span>
-				<span @click="deleteFile(file)" class="hover:text-red-600 cursor-pointer"><icon-view icon="delete" /></span>
+				<span @click="deleteFile(file)" class="hover:text-rufous cursor-pointer"><icon-view icon="delete" /></span>
 			</div>
 		</draggable>
 	</div>

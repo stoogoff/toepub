@@ -6,7 +6,7 @@
 			class="hidden"
 			:accept="acceptString"
 		/>
-		<div class="text-center mb-4">
+		<div class="text-center mb-4" v-if="hasSlot">
 			<slot />
 		</div>
 		<div class="text-center">
@@ -14,7 +14,7 @@
 				<icon-view :icon="icon" />
 			</span>
 			<span>
-				Drag file or click to upload.
+				Drag files or click to upload.
 			</span>
 		</div>
 	</div>
@@ -58,6 +58,10 @@ export default Vue.component('FileDropZone', {
 			}
 
 			return 'text-gray-600'
+		},
+
+		hasSlot() {
+			return !!this.$slots.default
 		},
 	},
 
