@@ -26,3 +26,5 @@ export const numbers = () => value => /[0-9]/.test(value) || 'Missing numbers'
 export const minVal = min => value => value >= min || `Minimum value: ${min}`
 
 export const maxVal = max => value => value <= max || `Maximum value: ${max}`
+
+export const format = (regex, message) => value => regex.test(value) || `Invalid format: ${message}`

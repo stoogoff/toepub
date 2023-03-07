@@ -1,30 +1,37 @@
 <template>
 	<section class="mx-auto w-2/3">
 		<loading-overlay v-if="loading" />
-		<div class="grid grid-cols-3 gap-4 mb-6">
-			<div class="instruction"><span>1</span>Select the files you want to convert to EPUB format.</div>
-			<div class="instruction"><span>2</span>Enter the title, author name and other information for your book.</div>
-			<div class="instruction"><span>3</span>Press the convert button and your files will be converted to EPUB format.</div>
+		<div class="grid grid-cols-3 gap-6 mb-6">
+			<div class="col-span-2">
+				<div class="instruction"><span>1</span>Select the files you want to convert to EPUB format. Files must be in Markdown or plain text format for the contents. Images can be uploaded as well and should be JPEG or PNG.</div>
+				<file-drop-zone @input="addFiles" />
+				<div class="instruction"><span>2</span>Enter the title, author name and other information for your book. Title and Author are required but everything else is optional.</div>
+				<div class="py-2">
+					<validate-field :value="title" :rules="rules.title" v-slot="{ error, message }">
+						<text-input label="Title *" v-model="title" :error="error" :message="message" />
+					</validate-field>
+					<validate-field :value="author" :rules="rules.author" v-slot="{ error, message }">
+						<text-input label="Author *" v-model="author" :error="error" :message="message" />
+					</validate-field>
+					<text-input label="Copyright" v-model="rights" />
+					<validate-field :value="date" :rules="rules.date" v-slot="{ error, message }">
+						<text-input label="Published Date" v-model="date" :error="error" :message="message" placeholder="YYYY-MM-DD" />
+					</validate-field>
+					<text-input label="Publisher" v-model="publisher" />
+				</div>
+				<div class="instruction"><span>3</span>Press the convert button and your files will be converted to EPUB format. Copies of your EPUB will be kept on our server for 24 hours before being deleted.</div>
+			</div>
+			<div>
+				<div v-if="hasFiles" class="px-2 py-4">
+					<p>Click the dustbin to remove a file or drag to reorder them.</p>
+					<file-list :files="files" @update="setFiles" />
+				</div>
+				<div v-else class="text-sm">
+					<p>Your files will appear here when they are ready.</p>
+				</div>
+			</div>
 		</div>
-		<file-drop-zone @input="addFiles">
-			<p>Files must be in Markdown or plain text format for the contents. Images should be JPEG or PNG.</p>
-		</file-drop-zone>
-		<div class="p-2">
-			<validate-field :value="title" :rules="rules.title" v-slot="{ error, message }">
-				<text-input label="Title *" v-model="title" :error="error" :message="message" />
-			</validate-field>
-			<validate-field :value="author" :rules="rules.author" v-slot="{ error, message }">
-				<text-input label="Author *" v-model="author" :error="error" :message="message" />
-			</validate-field>
-			<text-input label="Copyright" v-model="rights" />
-			<text-input label="Published Date" v-model="date" placehold="YYYY-MM-DD" />
-			<text-input label="Publisher" v-model="publisher" />
-		</div>
-		<div v-if="hasFiles" class="p-2">
-			<p>You have the following files ready. Click the dustbin to remove a file or drag to reorder them.</p>
-			<file-list :files="files" @update="setFiles" />
-		</div>
-		<div class="p-2">
+		<div class="py-2">
 			<button-action
 				block
 				type="primary"
@@ -36,7 +43,7 @@
 </template>
 <script>
 import { download } from '~/utils/file'
-import { required, validate, validateBatch } from '~/utils/validators'
+import { required, format, validate, validateBatch } from '~/utils/validators'
 
 export default {
 	name: 'IndexPage',
@@ -62,6 +69,7 @@ export default {
 			return this.hasFiles && validateBatch(this.rules, {
 				title: this.title,
 				author: this.author,
+				date: this.date,
 			})
 		},
 
@@ -69,6 +77,7 @@ export default {
 			return {
 				title: [required()],
 				author: [required()],
+				date: [format(/^\d{4}-\d{2}-\d{2}$/, 'YYYY-MM-DD')],
 			}
 		},
 	},
@@ -125,7 +134,7 @@ export default {
 </script>
 <style scoped>
 .instruction {
-	@apply border border-celestial-light bg-white p-4 rounded text-base relative;
+	@apply border border-celestial-light bg-white p-4 rounded text-base relative mb-4;
 }
 .instruction span {
 	@apply bg-celestial-lighter border border-celestial rounded-full absolute -top-2 -left-2 w-6 h-6 text-center text-sm text-celestial-dark font-bold;
