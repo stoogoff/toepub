@@ -6,12 +6,11 @@ const bodyParser = require('body-parser')
 const fileUpload = require('express-fileupload')
 const pandoc = require('node-pandoc')
 //const { getTodosForUser, saveTodoForUser, updateTodoForUser } = require('./todo')
-
-const { createId } = require('../utils/string')
+const { id, createId } = require('../utils/string')
 
 const app = express()
 
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded())
 app.use(fileUpload())
 
 // ----------
@@ -70,20 +69,27 @@ app.post('/upload', verifyAuthHeaderMiddleware, async (req, res, next) => {
 		return next({ status: 400, message: 'No files provided.' })
 	}
 
-	// make this editable in the UI
-	const contents = [`---
-title: Test File
-author: Stoo Goff
-rights:  Creative Commons Non-Commercial Share Alike 3.0
-language: en-GB
-...`]
+	// acceptable header fields
+	const headerFields = ['title', 'author', 'rights', 'date', 'publisher']
+	const header = ['---']
+
+	headerFields.forEach(field => {
+		if(field in req.body) {
+			header.push(`${field}: ${req.body[field]}`) // TODO sanitise
+		}
+	})
+
+	header.push('...')
+
+	const title = id(req.body.title || 'test')
+	const contents = [header.join('\n')]
 
 	Object.keys(req.files).forEach(key => {
 		contents.push(Buffer.from(req.files[key].data).toString())
 	})
 
 	const dirPath = path.join(__dirname, 'output', createId())
-	const filePath = path.join(dirPath, 'test.epub')
+	const filePath = path.join(dirPath, `${title}.epub`)
 
 	fs.mkdirSync(dirPath)
 
@@ -96,12 +102,9 @@ language: en-GB
 		const data = fs.readFileSync(filePath)
 
 		res.set('Content-Type', 'application/epub+zip')
-		res.set('Content-Disposition', 'attachment; filename="file.epub"')
+		res.set('Content-Disposition', `attachment; filename="${title}.epub"`)
 		res.status(200).send(data)
-		//res.status(200).send('OK')
 	})
-
-	//res.status(200).send('Received')
 })
 
 // error handler

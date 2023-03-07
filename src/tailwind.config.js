@@ -21,6 +21,8 @@ module.exports = {
 				},
 				rufous: {
 					DEFAULT: '#a72608',
+					dark: '#881e06',
+					darker: '#611605',
 				},
 			},
 		},

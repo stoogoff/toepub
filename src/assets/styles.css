@@ -28,3 +28,32 @@ body {
 .btn.primary {
 	@apply bg-celestial text-ghost hover:bg-celestial-dark;
 }
+
+/* form inputs */
+.input {
+	@apply font-sans text-gray-600 text-sm relative bg-white rounded border border-gray-300 shadow outline-none w-full focus:outline-none focus:ring focus:ring-celestial px-3 py-3 placeholder-gray-300;
+}
+.input.warning {
+	@apply focus:ring-rufous text-rufous-darker border-rufous;
+}
+.input.disabled {
+	@apply bg-gray-200;
+}
+
+/* labels and messages */
+.label {
+	@apply font-sans font-semibold text-xs uppercase inline-block mb-2 text-gray-500;
+}
+.label.warning {
+	@apply text-rufous-darker;
+}
+.message {
+	@apply mt-2 text-sm text-gray-500;
+}
+.message.success {
+	@apply text-celestial-dark;
+}
+.message.warning {
+	@apply text-rufous-darker;
+}
+
