@@ -43,7 +43,7 @@ export default {
 	buildModules: [
 		// https://go.nuxtjs.dev/tailwindcss
 		'@nuxtjs/tailwindcss',
-		//'@nuxtjs/google-fonts',
+		'@nuxtjs/google-fonts',
 	],
 
 	// Modules: https://go.nuxtjs.dev/config-modules
@@ -62,17 +62,16 @@ export default {
 		baseURL: process.env.API_URL,
 	},
 
-	/*googleFonts: {
+	googleFonts: {
 		families: {
-			Montserrat: {
-				wght: [400, 600, 700],
-				ital: [400]
+			Poppins: {
+				wght: [200, 300, 500]
 			},
 		},
 		prefetch: true,
 		preconnect: true,
 		useStylesheet: true,
-	},*/
+	},
 
 	image: {
 		cloudinary: {

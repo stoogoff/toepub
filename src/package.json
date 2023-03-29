@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@nuxt/image": "^0.7.1",
-    "@nuxtjs/google-fonts": "^2.0.0",
+    "@nuxtjs/google-fonts": "^3.0.0",
     "@nuxtjs/tailwindcss": "^4.2.0",
     "postcss": "^8.3.5"
   }

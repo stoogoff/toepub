@@ -4,7 +4,12 @@
 @tailwind utilities;
 
 body {
-	@apply leading-normal text-onyx text-lg bg-ghost;
+	@apply font-light leading-normal text-onyx text-lg bg-ghost;
+	font-family: 'Poppins', sans-serif;
+}
+
+strong {
+	@apply font-medium;
 }
 
 /* buttons */

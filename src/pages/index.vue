@@ -77,7 +77,7 @@ export default {
 			return {
 				title: [required()],
 				author: [required()],
-				date: [format(/^\d{4}-\d{2}-\d{2}$/, 'YYYY-MM-DD')],
+				date: [format(/^(\d{4}-\d{2}-\d{2})?$/, 'YYYY-MM-DD')],
 			}
 		},
 	},
@@ -121,6 +121,7 @@ export default {
 				download(fileName, response.data)
 
 				this.files = []
+				this.title = ''
 			}
 			catch(ex) {
 				console.log(ex)
