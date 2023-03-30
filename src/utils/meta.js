@@ -1,7 +1,7 @@
 
 const OG_TYPE = 'website'
 const BASE_URL = 'https://www.toepub.com'
-const BASE_TITLE = 'To Epub'
+const BASE_TITLE = '# Markdown To Epub'
 const BASE_DESCRIPTION = ''
 const BASE_IMAGE = `${BASE_URL}/img/kickstarter-banner.png`
 

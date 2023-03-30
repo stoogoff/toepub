@@ -4,7 +4,7 @@
 @tailwind utilities;
 
 body {
-	@apply font-light leading-normal text-onyx text-lg bg-ghost;
+	@apply font-light leading-normal text-gray-100 text-lg bg-gray-900;
 	font-family: 'Poppins', sans-serif;
 }
 
@@ -17,12 +17,12 @@ strong {
 	@apply font-sans font-bold uppercase text-sm text-center;
 	@apply px-6 py-3 mr-1 mb-1;
 	@apply rounded shadow outline-none focus:outline-none ease-linear transition-all duration-150;
-	@apply bg-gray-400 text-gray-700 hover:text-white hover:bg-gray-600;
+	@apply bg-gray-400 text-gray-700 hover:text-white hover:bg-gray-600 border border-gray-400;
 }
 .btn.disabled {
 	@apply cursor-default;
-	@apply bg-gray-300 text-gray-400 shadow-none;
-	@apply hover:bg-gray-300 hover:text-gray-400 hover:shadow-none;
+	@apply bg-gray-700 text-gray-500 shadow-none border-gray-900;
+	@apply hover:bg-gray-700 hover:text-gray-500 hover:shadow-none;
 }
 .btn.enabled {
 	@apply hover:shadow-lg cursor-pointer;
@@ -31,15 +31,15 @@ strong {
 	@apply px-3 py-1 text-xs;
 }
 .btn.primary {
-	@apply bg-celestial text-ghost hover:bg-celestial-dark;
+	@apply bg-indigo-600 text-gray-200 hover:text-gray-100 hover:bg-indigo-900 border-indigo-600 hover:border-indigo-400;
 }
 
 /* form inputs */
 .input {
-	@apply font-sans text-gray-600 text-sm relative bg-white rounded border border-gray-300 shadow outline-none w-full focus:outline-none focus:ring focus:ring-celestial px-3 py-3 placeholder-gray-300;
+	@apply font-sans text-gray-200 text-sm relative bg-gray-700 rounded border-2 border-gray-600 hover:border-gray-400 shadow outline-none w-full focus:outline-none focus:ring focus:ring-indigo-600 focus:border-gray-900 px-3 py-3 placeholder-gray-500;
 }
 .input.warning {
-	@apply focus:ring-rufous text-rufous-darker border-rufous;
+	@apply focus:ring-red-700 text-red-500 border-red-700;
 }
 .input.disabled {
 	@apply bg-gray-200;
@@ -47,18 +47,18 @@ strong {
 
 /* labels and messages */
 .label {
-	@apply font-sans font-semibold text-xs uppercase inline-block mb-2 text-gray-500;
+	@apply font-sans font-semibold text-xs uppercase inline-block mb-2 text-gray-300;
 }
 .label.warning {
-	@apply text-rufous-darker;
+	@apply text-red-600;
 }
 .message {
 	@apply mt-2 text-sm text-gray-500;
 }
 .message.success {
-	@apply text-celestial-dark;
+	@apply text-green-600;
 }
 .message.warning {
-	@apply text-rufous-darker;
+	@apply text-red-600;
 }
 

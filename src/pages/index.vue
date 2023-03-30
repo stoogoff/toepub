@@ -135,9 +135,9 @@ export default {
 </script>
 <style scoped>
 .instruction {
-	@apply border border-celestial-light bg-white p-4 rounded text-base relative mb-4;
+	@apply border border-gray-600 bg-gray-800 p-4 rounded text-base relative mb-4 text-gray-300;
 }
 .instruction span {
-	@apply bg-celestial-lighter border border-celestial rounded-full absolute -top-2 -left-2 w-6 h-6 text-center text-sm text-celestial-dark font-bold;
+	@apply bg-indigo-600 border border-indigo-400 rounded-full absolute -top-3 -left-4 w-8 h-8 text-center text-sm text-indigo-100 font-bold;
 }
 </style>
