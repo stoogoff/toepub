@@ -5,13 +5,18 @@
 			<div class="col-span-2">
 				<tab-group>
 					<tab-panel title="Content">
-						<div class="instruction">Select the files you want to convert to EPUB format. Files must be in Markdown or plain text format for the contents. Images can be uploaded as well and should be JPEG or PNG.</div>
-						<file-drop-zone @input="addFiles" />
+						<add-files :files="files" @add="addFiles" @update="setFiles" />
 					</tab-panel>
 					<tab-panel title="Images">
-						hello
+						<add-images
+							:images="images"
+							:selected-image="coverImage"
+							@add="addImages"
+							@update="setImages"
+							@select="setCoverImage"
+						/>
 					</tab-panel>
-					<tab-panel title="Meta Data">
+					<tab-panel title="Metadata">
 						<div class="instruction">Enter the title, author name and other information for your book. Title and Author are required but everything else is optional.</div>
 						<div class="py-2">
 							<validate-field :value="title" :rules="rules.title" v-slot="{ error, message }">
@@ -30,9 +35,14 @@
 				</tab-group>
 			</div>
 			<div>
-				<div v-if="hasFiles" class="px-2 py-4">
-					<p>Click the dustbin to remove a file or drag to reorder them.</p>
-					<file-list :files="files" @update="setFiles" />
+				<div class="mt-16">
+					<ul>
+						<li>Files uploaded</li>
+						<li>Images uploaded</li>
+						<li>Cover image selected</li>
+						<li>Metadata complete</li>
+					</ul>
+
 					<div class="instruction">Press the convert button and your files will be converted to EPUB format. Copies of your EPUB will be kept on our server for 24 hours before being deleted.</div>
 					<button-action
 						block
@@ -40,9 +50,6 @@
 						:disabled="!canContinue"
 						@click="upload"
 					>Convert</button-action>
-				</div>
-				<div v-else class="text-sm">
-					<p>Your files will appear here when they are ready.</p>
 				</div>
 			</div>
 		</div>
@@ -59,6 +66,8 @@ export default {
 		return {
 			loading: false,
 			files: [],
+			images: [],
+			coverImage: null,
 			title: '',
 			author: '',
 			rights: '',
@@ -96,6 +105,18 @@ export default {
 
 		setFiles(files) {
 			this.files = [ ...files ]
+		},
+
+		addImages(images) {
+			this.images = [...this.images, ...images]
+		},
+
+		setImages(images) {
+			this.images = [ ...images ]
+		},
+
+		setCoverImage(image) {
+			this.coverImage = image
 		},
 
 		async upload() {
@@ -140,8 +161,3 @@ export default {
 }
 
 </script>
-<style scoped>
-.instruction {
-	@apply border border-gray-600 bg-gray-800 p-4 rounded text-base relative mb-4 text-gray-300;
-}
-</style>

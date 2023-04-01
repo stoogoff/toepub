@@ -1,10 +1,9 @@
 <template>
-	<div class="mb-4">
+	<div>
 		<loading-spinner v-if="src === null" />
-		<figure v-else class="p-1 input relative">
-			<figcaption class="label">Current Image</figcaption>
+		<figure v-else class="p-1 relative">
 			<img :src="src" class="block w-full" />
-			<span class="inline-block absolute bottom-1 right-1"><icon-action icon="delete" type="warning" outlined @click="$emit('delete')" /></span>
+			<span @click="$emit('delete')" class="inline-block absolute bottom-1 right-1 text-red-600 hover:text-white cursor-pointer"><icon-view icon="delete" /></span>
 		</figure>
 	</div>
 </template>
@@ -14,7 +13,6 @@ import Vue from 'vue'
 export default Vue.component('ImageUpload', {
 	props: {
 		file: {
-			type: [Object],
 			required: true,
 		},
 	},
