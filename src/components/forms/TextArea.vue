@@ -4,7 +4,7 @@
 			:id="field.id"
 			:value="value"
 			type="text"
-			:class="inputClass"
+			:class="`font-sans text-sm relative rounded border-2 shadow outline-none w-full px-3 py-3 ${inputClass}`"
 			:disabled="disabled"
 			:placeholder="placeholder"
 			@input="$emit('input', $event.target.value)"

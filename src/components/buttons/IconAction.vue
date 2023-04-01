@@ -1,5 +1,10 @@
 <template>
-	<button :class="classList" :disabled="disabled" @click="$emit('click')">
+	<button
+		class="btn btn-icon border font-sans font-bold uppercase text-sm text-center px-6 py-3 mr-1 mb-1 rounded shadow outline-none focus:outline-none ease-linear transition-all duration-150"
+		:class="classList"
+		:disabled="disabled"
+		@click="$emit('click')"
+	>
 		<icon-view :icon="icon" />
 	</button>
 </template>
@@ -28,17 +33,17 @@ export default Vue.component('IconAction', {
 
 	computed: {
 		classList() {
-			let classList = ['btn btn-icon']
+			let classList = []
 
 			if(this.outlined) {
 				classList.push('outlined')
 			}
 
 			if(this.disabled === true) {
-				classList.push('disabled')
+				classList.push('cursor-default shadow-none hover:shadow-none disabled')
 			}
 			else {
-				classList.push('enabled')
+				classList.push('hover:shadow-lg cursor-pointer enabled')
 				classList.push(this.type)
 			}
 

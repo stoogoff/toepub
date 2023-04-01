@@ -1,7 +1,11 @@
 <template>
-	<button :class="classList" :disabled="disabled" @click="$emit('click')">
+	<button
+		:class="classList"
+		class="btn border font-sans font-bold uppercase text-sm text-center px-6 py-3 mr-1 mb-1 rounded shadow outline-none focus:outline-none ease-linear transition-all duration-150"
+		:disabled="disabled"
+		@click="$emit('click')"
+	>
 		<slot />
-		<span class="hidden btn disabled enabled primary secondary success warning outlined small"></span>
 	</button>
 </template>
 <script>
@@ -33,7 +37,7 @@ export default Vue.component('ButtonAction', {
 
 	computed: {
 		classList() {
-			let classList = ['btn']
+			let classList = []
 
 			if(this.block === true) {
 				classList.push('block w-full')
@@ -44,14 +48,14 @@ export default Vue.component('ButtonAction', {
 			}
 
 			if(this.small) {
-				classList.push('small')
+				classList.push('px-3 py-1 text-xs')
 			}
 
-			if(this.disabled === true) {
-				classList.push('disabled')
+			if(this.disabled) {
+				classList.push('cursor-default shadow-none hover:shadow-none disabled')
 			}
 			else {
-				classList.push('enabled')
+				classList.push('hover:shadow-lg cursor-pointer enabled')
 				classList.push(this.type)
 			}
 

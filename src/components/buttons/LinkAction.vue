@@ -1,5 +1,9 @@
 <template>
-	<nuxt-link :class="classList" :disabled="disabled" :to="to">
+	<nuxt-link
+		class="btn inline-block border font-sans font-bold uppercase text-sm text-center px-6 py-3 mr-1 mb-1 rounded shadow outline-none focus:outline-none ease-linear transition-all duration-150"
+		:class="classList"
+		:disabled="disabled"
+		:to="to">
 		<slot />
 	</nuxt-link>
 </template>
@@ -32,7 +36,7 @@ export default Vue.component('LinkAction', {
 
 	computed: {
 		classList() {
-			let classList = ['btn', 'inline-block']
+			let classList = []
 
 			if(this.block === true) {
 				classList.push('block w-full')
@@ -43,10 +47,10 @@ export default Vue.component('LinkAction', {
 			}
 
 			if(this.disabled === true) {
-				classList.push('disabled')
+				classList.push('cursor-default shadow-none hover:shadow-none disabled')
 			}
 			else {
-				classList.push('enabled')
+				classList.push('hover:shadow-lg cursor-pointer enabled')
 				classList.push(this.type)
 			}
 

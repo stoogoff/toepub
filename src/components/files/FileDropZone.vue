@@ -1,5 +1,5 @@
 <template>
-	<div class="flex flex-col bg-gray-800 py-16 px-4 mb-4 border-4 border-dashed border-gray-700" :class="colour">
+	<div class="flex flex-col py-16 px-4 mb-4 border-4 border-dashed drop-zone" :class="colour">
 		<input
 			ref="fileUpload"
 			type="file"
@@ -50,14 +50,14 @@ export default Vue.component('FileDropZone', {
 
 		colour() {
 			if(this.fileError) {
-				return 'text-red-500'
+				return 'error'
 			}
 
 			if(this.dragover) {
-				return 'text-gray-100'
+				return 'hover'
 			}
 
-			return 'text-gray-400'
+			return ''
 		},
 
 		hasSlot() {

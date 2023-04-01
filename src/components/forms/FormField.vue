@@ -1,8 +1,8 @@
 <template>
 	<div class="mb-4 pt-0">
-		<label :for="id" :class="labelClass">{{ label }}</label>
+		<label :for="id" :class="`font-sans font-semibold text-xs uppercase inline-block mb-2 ${labelClass}`">{{ label }}</label>
 		<slot v-bind:id="id" />
-		<aside :class="messageClass">{{ message || ' ' }}</aside>
+		<aside :class="`mt-2 text-sm ${messageClass}`">{{ message || ' ' }}</aside>
 	</div>
 </template>
 <script>
