@@ -34,36 +34,6 @@ const verifyAuthHeaderMiddleware = async (req, res, next) => {
 // check it works
 app.get('/hello', (req, res) => res.send('Hello'))
 
-
-// todo routes
-/*app.get('/todos', verifyAuthHeaderMiddleware, (req, res) => {
-	const todos = getTodosForUser(res.locals.userToken)
-
-	res.json(todos)
-})
-
-app.post('/todos', verifyAuthHeaderMiddleware, (req, res, next) => {
-	try {
-		saveTodoForUser(res.locals.userToken, req.body)
-
-		res.status(201).send()
-	}
-	catch(ex) {
-		next({ status: 400, message: ex })
-	}
-})
-
-app.put('/todos/:id', verifyAuthHeaderMiddleware, (req, res, next) => {
-	try {
-		updateTodoForUser(res.locals.userToken, req.params.id, req.body)
-
-		res.status(204).send()
-	}
-	catch(ex) {
-		next({ status: 400, message: ex })
-	}
-})*/
-
 app.post('/upload', verifyAuthHeaderMiddleware, async (req, res, next) => {
 	if(!req.files) {
 		return next({ status: 400, message: 'No files provided.' })

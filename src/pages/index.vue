@@ -36,14 +36,12 @@
 			</div>
 			<div>
 				<div class="mt-16">
-					<ul>
-						<li>Files uploaded</li>
-						<li>Images uploaded</li>
-						<li>Cover image selected</li>
-						<li>Metadata complete</li>
-					</ul>
+					<status-message :status="hasFiles ? 'success' : 'normal'">Files uploaded</status-message>
+					<status-message :status="hasImages ? 'success' : 'normal'">Images uploaded</status-message>
+					<status-message :status="hasCoverImage ? 'success' : 'normal'">Cover image selected</status-message>
+					<status-message :status="metadataStatus">Metadata complete</status-message>
 
-					<div class="instruction">Press the convert button and your files will be converted to EPUB format. Copies of your EPUB will be kept on our server for 24 hours before being deleted.</div>
+					<div class="instruction mt-2">Press the convert button and your files will be converted to EPUB format. Copies of your EPUB will be kept on our server for 24 hours before being deleted.</div>
 					<button-action
 						block
 						type="primary"
@@ -64,6 +62,7 @@ export default {
 
 	data() {
 		return {
+			hasChanged: false,
 			loading: false,
 			files: [],
 			images: [],
@@ -76,13 +75,44 @@ export default {
 		}
 	},
 
+	watch: {
+		title() {
+			this.hasChanged = true
+		},
+
+		author() {
+			this.hasChanged = true
+		},
+	},
+
 	computed: {
 		hasFiles() {
 			return this.files.length > 0
 		},
 
+		hasImages() {
+			return this.images.length > 0
+		},
+
+		hasCoverImage() {
+			return this.coverImage !== null
+		},
+
+		metadataStatus() {
+			console.log(this.metadataIsValid)
+
+			if(this.metadataIsValid) return 'success'
+			else if(this.hasChanged) return 'error'
+
+			return 'normal'
+		},
+
 		canContinue() {
-			return this.hasFiles && validateBatch(this.rules, {
+			return this.hasFiles && this.metadataIsValid
+		},
+
+		metadataIsValid() {
+			return validateBatch(this.rules, {
 				title: this.title,
 				author: this.author,
 				date: this.date,
@@ -124,6 +154,12 @@ export default {
 
 			// files
 			this.files.forEach(file => data.append(file.name, file))
+
+			// cover image
+			if(this.coverImage !== null) data.append('cover', this.coverImage)
+
+			// other images
+			this.images.filter(i => img !== this.coverImage).forEach(img => data.append(img.name, img))
 
 			// required fields
 			data.append('title', this.title)

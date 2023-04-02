@@ -49,7 +49,6 @@ export default {
 	// Modules: https://go.nuxtjs.dev/config-modules
 	modules: [
 		'@nuxtjs/axios',
-		//'@nuxt/image',
 	],
 
 	serverMiddleware: [
@@ -71,12 +70,6 @@ export default {
 		prefetch: true,
 		preconnect: true,
 		useStylesheet: true,
-	},
-
-	image: {
-		cloudinary: {
-			baseURL: `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUDNAME}/image/upload/`
-		}
 	},
 
 	// Build Configuration: https://go.nuxtjs.dev/config-build
