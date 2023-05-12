@@ -6,4 +6,5 @@ module.exports = {
 			translate: ['group-hover'],
 		},
 	},
+	content: ['./node_modules/we-ui/components/**/*.vue'],
 }

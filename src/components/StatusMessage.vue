@@ -26,7 +26,7 @@ export default Vue.component('StatusMessage', {
 		},
 
 		isError() {
-			return this.status === 'error'
+			return this.status === 'warning'
 		},
 	},
 })

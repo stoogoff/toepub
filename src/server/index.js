@@ -5,12 +5,11 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const fileUpload = require('express-fileupload')
 const pandoc = require('node-pandoc')
-//const { getTodosForUser, saveTodoForUser, updateTodoForUser } = require('./todo')
-const { id, createId } = require('../utils/string')
+const { id, createId } = require('we-ui/utils/string')
 
 const app = express()
 
-app.use(bodyParser.urlencoded())
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(fileUpload())
 
 // ----------
@@ -53,7 +52,7 @@ app.post('/upload', verifyAuthHeaderMiddleware, async (req, res, next) => {
 
 	const title = id(req.body.title || 'test')
 	const contents = [header.join('\n')]
-
+console.log(header)
 	Object.keys(req.files).forEach(key => {
 		contents.push(Buffer.from(req.files[key].data).toString())
 	})

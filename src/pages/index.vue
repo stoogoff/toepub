@@ -54,8 +54,8 @@
 	</section>
 </template>
 <script>
-import { download } from '~/utils/file'
-import { required, format, validate, validateBatch } from '~/utils/validators'
+import { download } from 'we-ui/utils/file'
+import { required, format, validate, validateBatch } from 'we-ui/utils/validators'
 
 export default {
 	name: 'IndexPage',
@@ -99,10 +99,8 @@ export default {
 		},
 
 		metadataStatus() {
-			console.log(this.metadataIsValid)
-
 			if(this.metadataIsValid) return 'success'
-			else if(this.hasChanged) return 'error'
+			else if(this.hasChanged) return 'warning'
 
 			return 'normal'
 		},
@@ -159,7 +157,7 @@ export default {
 			if(this.coverImage !== null) data.append('cover', this.coverImage)
 
 			// other images
-			this.images.filter(i => img !== this.coverImage).forEach(img => data.append(img.name, img))
+			this.images.filter(img => img !== this.coverImage).forEach(img => data.append(img.name, img))
 
 			// required fields
 			data.append('title', this.title)

@@ -44,6 +44,7 @@ export default {
 		// https://go.nuxtjs.dev/tailwindcss
 		'@nuxtjs/tailwindcss',
 		'@nuxtjs/google-fonts',
+		'we-ui/nuxt',
 	],
 
 	// Modules: https://go.nuxtjs.dev/config-modules
@@ -77,5 +78,6 @@ export default {
 		cache: process.env.NODE_ENV !== 'production',
 		extractCSS: process.env.NODE_ENV === 'production' ? { ignoreOrder: true } : false,
 		optimizeCSS: process.env.NODE_ENV === 'production',
+		transpile: ['we-ui'],
 	},
 }

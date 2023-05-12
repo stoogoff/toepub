@@ -9,18 +9,22 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
+    "core-js": "^3.25.3",
+    "nuxt": "^2.15.8",
+    "vue": "^2.7.10",
+    "vue-server-renderer": "^2.7.10",
+    "vue-template-compiler": "^2.7.10",
     "@nuxtjs/axios": "^5.13.6",
-    "core-js": "^3.15.1",
     "express": "^4.18.2",
     "express-fileupload": "^1.4.0",
     "node-pandoc": "^0.3.0",
-    "nuxt": "^2.15.7",
-    "vuedraggable": "^2.24.3"
+    "vuedraggable": "^2.24.3",
+    "we-ui": "https://github.com/stoogoff/nuxt-components"
   },
   "devDependencies": {
     "@nuxt/image": "^0.7.1",
     "@nuxtjs/google-fonts": "^3.0.0",
-    "@nuxtjs/tailwindcss": "^4.2.0",
-    "postcss": "^8.3.5"
+    "@nuxtjs/tailwindcss": "^5.3.3",
+    "postcss": "^8.4.17"
   }
 }
